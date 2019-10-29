@@ -9,6 +9,10 @@
         <OrderReview Order="OrderState.Order" />
     </div>
 
+    <div class="checkout-devlivery-address">
+        <h4>Deliver to...</h4>
+        <AddressEditor Address="@OrderState.Order.DeliveryAddress" />
+    </div>
     <button class="checkout-button btn btn-warning" @onclick="PlaceOrder">
         PlaceOrder
     </button>
