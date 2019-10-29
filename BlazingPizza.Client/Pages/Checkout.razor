@@ -1,0 +1,24 @@
+﻿@page "/checkout"
+@inject OrderState OrderState
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+
+<div class="main">
+    <div class="chekout-order-details">
+        <h4>Review order</h4>
+        <OrderReview Order="OrderState.Order" />
+    </div>
+
+    <button class="checkout-button btn btn-warning" @onclick="PlaceOrder">
+        PlaceOrder
+    </button>
+</div>
+
+@code {
+    async Task PlaceOrder()
+    {
+        var newOrderId = await HttpClient.PostJsonAsync<int>("orders", OrderState.Order);
+        OrderState.ResetOrder();
+        NavigationManager.NavigateTo($"myorders/{newOrderId}");
+    }
+}
